@@ -4,7 +4,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 # VERSION
 
-version 0.01
+version 0.02
 
 # SYNOPSIS
 
@@ -51,6 +51,10 @@ receive.
 ## host
 
 The IP address of the host that we'll be connecting to.
+
+## port
+
+The port of the IP address of the host we'll be connecting to.
 
 ## response_prefix
 

@@ -4,7 +4,7 @@
       "Cory G Watson <gphat@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300001, CPAN::Meta::Converter version 2.112150",
+   "generated_by" : "Dist::Zilla version 4.300003, CPAN::Meta::Converter version 2.112150",
    "license" : [
       "perl_5"
    ],
@@ -48,6 +48,6 @@
          "web" : "https://github.com/iinteractive/net-bullfinch"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
 

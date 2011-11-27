@@ -1,6 +1,6 @@
 package Net::Bullfinch::Iterator;
 {
-  $Net::Bullfinch::Iterator::VERSION = '0.01';
+  $Net::Bullfinch::Iterator::VERSION = '0.02';
 }
 use Moose;
 
@@ -116,7 +116,7 @@ Net::Bullfinch::Iterator - A way to iterator over results from Bullfinch
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

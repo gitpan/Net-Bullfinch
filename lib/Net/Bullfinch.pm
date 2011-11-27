@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.01';
+  $Net::Bullfinch::VERSION = '0.02';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -19,7 +19,10 @@ has '_client' => (
     isa => 'Net::Kestrel',
     default => sub {
         my $self = shift;
-        return Net::Kestrel->new(host => $self->host);
+        return Net::Kestrel->new(
+            host => $self->host,
+            ($self->port ? (port => $self->port) : ())
+        );
     },
     lazy => 1
 );
@@ -28,6 +31,11 @@ has 'host' => (
     is => 'rw',
     isa => 'Str',
     required => 1
+);
+
+has 'port' => (
+    is => 'rw',
+    isa => 'Int'
 );
 
 has 'response_prefix' => (
@@ -130,7 +138,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -177,6 +185,10 @@ receive.
 =head2 host
 
 The IP address of the host that we'll be connecting to.
+
+=head2 port
+
+The port of the IP address of the host we'll be connecting to.
 
 =head2 response_prefix
 
