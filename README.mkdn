@@ -4,7 +4,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 # VERSION
 
-version 0.02
+version 0.03
 
 # SYNOPSIS
 
@@ -67,7 +67,7 @@ back from Bullfinch.
 
 # METHODS
 
-## send( request_queue => $queue, request => \%data, response_queue_suffix => $response_name);
+## send( request_queue => $queue, request => \%data, response_queue_suffix => $response_name, process_by => $procby);
 
 Send the request to the specified queue and await a response.  The data
 should be a hashref and the queuename (optional) will be appended to
@@ -80,13 +80,15 @@ request.
 Any messages sent in response (save the EOF message) are returned as an
 arrayref to the caller.
 
+The optional `process_by` must be an ISO 8601 date.
+
 # AUTHOR
 
 Cory G Watson <gphat@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Infinity Interactive, Inc.
+This software is copyright (c) 2012 by Infinity Interactive, Inc.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

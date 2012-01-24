@@ -31,9 +31,10 @@ my %WriteMakefileArgs = (
     "JSON::XS" => 0,
     "Moose" => 0,
     "MooseX::Params::Validate" => 0,
+    "MooseX::Types::DateTime" => 0,
     "Net::Kestrel" => 0
   },
-  "VERSION" => "0.02",
+  "VERSION" => "0.03",
   "test" => {
     "TESTS" => "t/*.t"
   }

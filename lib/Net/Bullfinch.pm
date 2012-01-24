@@ -1,9 +1,10 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.02';
+  $Net::Bullfinch::VERSION = '0.03';
 }
 use Moose;
 use MooseX::Params::Validate;
+use MooseX::Types::DateTime;
 
 # ABSTRACT: Perl wrapper for talking with Bullfinch
 
@@ -52,14 +53,15 @@ has 'timeout' => (
 
 
 sub send {
-    my ($self, $queue, $data, $queuename, $trace) = validated_list(\@_,
+    my ($self, $queue, $data, $queuename, $trace, $procby) = validated_list(\@_,
         request_queue         => { isa => 'Str' },
         request               => { isa => 'HashRef' },
         response_queue_suffix => { isa => 'Str', optional => 1 },
-        trace                 => { isa => 'Bool', default => 0, optional => 1 }
+        trace                 => { isa => 'Bool', default => 0, optional => 1 },
+        process_by            => { isa => 'DateTime', optional => 1 }
     );
 
-    my ($rname, $json) = $self->_prepare_request($data, $queuename, $trace);
+    my ($rname, $json) = $self->_prepare_request($data, $queuename, $trace, $procby);
     my $kes = $self->_client;
 
     $kes->put($queue, $json);
@@ -106,7 +108,7 @@ sub iterate {
 }
 
 sub _prepare_request {
-    my ($self, $data, $queuename, $trace) = @_;
+    my ($self, $data, $queuename, $trace, $procby) = @_;
 
     # Make a copy of the hash so that we can add a key to it
     my %copy = %{ $data };
@@ -123,6 +125,10 @@ sub _prepare_request {
         my $ug = Data::UUID->new;
         $copy{tracer} = $ug->create_str;
     }
+    
+    if($procby) {
+        $copy{'process-by'} = $procby->iso8601;
+    }
 
     return ($rname, encode_json(\%copy));
 }
@@ -138,7 +144,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -201,7 +207,7 @@ back from Bullfinch.
 
 =head1 METHODS
 
-=head2 send( request_queue => $queue, request => \%data, response_queue_suffix => $response_name);
+=head2 send( request_queue => $queue, request => \%data, response_queue_suffix => $response_name, process_by => $procby);
 
 Send the request to the specified queue and await a response.  The data
 should be a hashref and the queuename (optional) will be appended to
@@ -214,13 +220,15 @@ request.
 Any messages sent in response (save the EOF message) are returned as an
 arrayref to the caller.
 
+The optional C<process_by> must be an ISO 8601 date.
+
 =head1 AUTHOR
 
 Cory G Watson <gphat@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Infinity Interactive, Inc.
+This software is copyright (c) 2012 by Infinity Interactive, Inc.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
