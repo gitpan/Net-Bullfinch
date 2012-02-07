@@ -21,11 +21,11 @@ requires:
   Data::Stream::Bulk::DoneFlag: 0
   Data::UUID: 0
   JSON::XS: 0
+  Memcached::Client: 0
   Moose: 0
   MooseX::Params::Validate: 0
   MooseX::Types::DateTime: 0
-  Net::Kestrel: 0
 resources:
   homepage: https://github.com/iinteractive/net-bullfinch
   repository: https://github.com/iinteractive/net-bullfinch.git
-version: 0.03
+version: 0.04

@@ -29,12 +29,12 @@ my %WriteMakefileArgs = (
     "Data::Stream::Bulk::DoneFlag" => 0,
     "Data::UUID" => 0,
     "JSON::XS" => 0,
+    "Memcached::Client" => 0,
     "Moose" => 0,
     "MooseX::Params::Validate" => 0,
-    "MooseX::Types::DateTime" => 0,
-    "Net::Kestrel" => 0
+    "MooseX::Types::DateTime" => 0
   },
-  "VERSION" => "0.03",
+  "VERSION" => "0.04",
   "test" => {
     "TESTS" => "t/*.t"
   }
