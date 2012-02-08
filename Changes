@@ -1,5 +1,8 @@
 Revision history for Net::Bullfinch
 
+0.05 Feb 8 2012
+   * Add expire support for requests
+
 0.04 Feb 7 2012
    * Use Memcached::Client in lieu of Net::Kestrel, as it's likely
      much more reliable.
