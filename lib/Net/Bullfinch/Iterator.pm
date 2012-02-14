@@ -1,6 +1,6 @@
 package Net::Bullfinch::Iterator;
 {
-  $Net::Bullfinch::Iterator::VERSION = '0.05';
+  $Net::Bullfinch::Iterator::VERSION = '0.06';
 }
 use Moose;
 
@@ -41,10 +41,9 @@ sub get_more {
     my @results;
 
     while ( 1 ) {
-        my $resp = $kestrel->get( $resp_queue, $timeout );
+        my $resp = $kestrel->get($resp_queue.'/t='.$timeout);
 
         if ( defined $resp ) {
-            $kestrel->confirm( $resp_queue, 1 );
             my $decoded = decode_json( $resp );
             if ( exists $decoded->{'EOF'} ) {
                 $self->_set_done;
@@ -116,7 +115,7 @@ Net::Bullfinch::Iterator - A way to iterator over results from Bullfinch
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

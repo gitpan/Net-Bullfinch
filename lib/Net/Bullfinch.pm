@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.05';
+  $Net::Bullfinch::VERSION = '0.06';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -69,10 +69,8 @@ sub send {
 
     my @items = ();
     while(1) {
-        #my $resp = $kes->get($rname, $self->timeout);
-        my $resp = $kes->get($rname.'/t='.$self->timeout.'/open');
+        my $resp = $kes->get($rname.'/t='.$self->timeout);
         if(defined($resp)) {
-            $kes->get($rname.'/close');
             my $decoded = decode_json($resp);
             if(exists($decoded->{EOF})) {
                 last;
@@ -146,7 +144,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
