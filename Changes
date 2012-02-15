@@ -1,5 +1,8 @@
 Revision history for Net::Bullfinch
 
+0.07 Feb 15 2012
+   * More iterator fixes.
+
 0.06 Feb 14 2012
    * Fix busted iterator
    * Don't bother with /open and /close

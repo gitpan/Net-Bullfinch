@@ -28,4 +28,4 @@ requires:
 resources:
   homepage: https://github.com/iinteractive/net-bullfinch
   repository: https://github.com/iinteractive/net-bullfinch.git
-version: 0.06
+version: 0.07

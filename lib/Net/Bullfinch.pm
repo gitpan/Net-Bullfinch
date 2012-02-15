@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.06';
+  $Net::Bullfinch::VERSION = '0.07';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -144,7 +144,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
