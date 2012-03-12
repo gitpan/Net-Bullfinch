@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.07';
+  $Net::Bullfinch::VERSION = '0.08';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -65,7 +65,8 @@ sub send {
     my ($rname, $json) = $self->_prepare_request($data, $queuename, $trace, $procby);
     my $kes = $self->_client;
 
-    $kes->set($queue, $json, $expire);
+    my $src = $kes->set($queue, $json, $expire);
+    die "Failed to send request!" unless $src;
 
     my @items = ();
     while(1) {
@@ -82,7 +83,8 @@ sub send {
             last;
         }
     }
-    $kes->delete($rname);
+    my $drc = $kes->delete($rname);
+    warn "Failed to delete response queue!" unless $drc;
 
     return \@items;
 }
@@ -144,7 +146,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
@@ -169,6 +171,9 @@ a L<Bullfinch|https://github.com/gphat/bullfinch/>.
 This module handles JSON encoding of the request, the addition of a response
 queue, waiting for a response, confirmation of the message, decoding of the
 response and deletion of the response queue.
+
+If you're expecting large numbers of results you might enjoy using
+L<Net::Bullfinch::Iterator> to return any given number of max_results at a time.
 
 =head1 TRACING
 
@@ -224,6 +229,8 @@ The optional C<process_by> must be an ISO 8601 date.
 
 The optional C<expiration> is the number of seconds this request should live
 in the queue before expiring.
+
+B<Note:> Send will die if it fails to properly enqueue the request.
 
 =head1 AUTHOR
 

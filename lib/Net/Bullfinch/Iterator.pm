@@ -1,6 +1,6 @@
 package Net::Bullfinch::Iterator;
 {
-  $Net::Bullfinch::Iterator::VERSION = '0.07';
+  $Net::Bullfinch::Iterator::VERSION = '0.08';
 }
 use Moose;
 
@@ -114,7 +114,7 @@ Net::Bullfinch::Iterator - A way to iterator over results from Bullfinch
 
 =head1 VERSION
 
-version 0.07
+version 0.08
 
 =head1 SYNOPSIS
 
@@ -122,7 +122,7 @@ version 0.07
 
     my $client = Net::Bullfinch->new(host => '172.16.49.130');
     my $req = { statement => 'some-query' };
-    my $items = $client->send(
+    my $items = $client->iterate(
         request_queue => 'test-net-kestrel',
         request => $req,
         response_queue_suffix => 'foobar',

@@ -4,7 +4,7 @@
       "Cory G Watson <gphat@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "generated_by" : "Dist::Zilla version 4.300009, CPAN::Meta::Converter version 2.120630",
    "license" : [
       "perl_5"
    ],
@@ -21,27 +21,31 @@
       },
       "runtime" : {
          "requires" : {
-            "Data::Stream::Bulk" : 0,
-            "Data::Stream::Bulk::DoneFlag" : 0,
-            "Data::UUID" : 0,
-            "JSON::XS" : 0,
-            "Memcached::Client" : 0,
-            "Moose" : 0,
-            "MooseX::Params::Validate" : 0,
-            "MooseX::Types::DateTime" : 0
+            "Data::Stream::Bulk" : "0",
+            "Data::Stream::Bulk::DoneFlag" : "0",
+            "Data::UUID" : "0",
+            "JSON::XS" : "0",
+            "Memcached::Client" : "0",
+            "Moose" : "0",
+            "MooseX::Params::Validate" : "0",
+            "MooseX::Types::DateTime" : "0"
          }
       },
       "test" : {
          "requires" : {
-            "Test::Fatal" : 0,
-            "Test::More" : 0,
-            "strict" : 0,
-            "warnings" : 0
+            "Test::Exception" : "0",
+            "Test::Fatal" : "0",
+            "Test::More" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
    "release_status" : "stable",
    "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/iinteractive/net-bullfinch/issues"
+      },
       "homepage" : "https://github.com/iinteractive/net-bullfinch",
       "repository" : {
          "type" : "git",
@@ -49,6 +53,6 @@
          "web" : "https://github.com/iinteractive/net-bullfinch"
       }
    },
-   "version" : "0.07"
+   "version" : "0.08"
 }
 

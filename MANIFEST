@@ -6,8 +6,10 @@ META.yml
 Makefile.PL
 README
 README.mkdn
+ass.pl
 lib/Net/Bullfinch.pm
 lib/Net/Bullfinch/Iterator.pm
 t/000-load.t
+t/failure.t
 t/release-pod-syntax.t
 t/release-synopsis.t

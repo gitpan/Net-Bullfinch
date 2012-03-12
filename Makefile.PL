@@ -12,6 +12,7 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Perl wrapper for talking with Bullfinch",
   "AUTHOR" => "Cory G Watson <gphat\@cpan.org>",
   "BUILD_REQUIRES" => {
+    "Test::Exception" => 0,
     "Test::Fatal" => 0,
     "Test::More" => 0,
     "strict" => 0,
@@ -34,7 +35,7 @@ my %WriteMakefileArgs = (
     "MooseX::Params::Validate" => 0,
     "MooseX::Types::DateTime" => 0
   },
-  "VERSION" => "0.07",
+  "VERSION" => "0.08",
   "test" => {
     "TESTS" => "t/*.t"
   }
