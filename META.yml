@@ -24,10 +24,11 @@ requires:
   JSON::XS: 0
   Memcached::Client: 0
   Moose: 0
+  Moose::Util::TypeConstraints: 0
   MooseX::Params::Validate: 0
   MooseX::Types::DateTime: 0
 resources:
   bugtracker: https://github.com/iinteractive/net-bullfinch/issues
   homepage: https://github.com/iinteractive/net-bullfinch
   repository: https://github.com/iinteractive/net-bullfinch.git
-version: 0.08
+version: 0.09

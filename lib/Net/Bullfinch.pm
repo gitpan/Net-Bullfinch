@@ -1,10 +1,11 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.08';
+  $Net::Bullfinch::VERSION = '0.09';
 }
 use Moose;
 use MooseX::Params::Validate;
 use MooseX::Types::DateTime;
+use Moose::Util::TypeConstraints;
 
 # ABSTRACT: Perl wrapper for talking with Bullfinch
 
@@ -13,6 +14,10 @@ use JSON::XS;
 use Memcached::Client;
 
 use Net::Bullfinch::Iterator;
+
+subtype 'QueueName',
+    as 'Str',
+    where { $_ =~ /^[a-zA-Z0-0_-]*$/ };
 
 
 has '_client' => (
@@ -54,9 +59,9 @@ has 'timeout' => (
 
 sub send {
     my ($self, $queue, $data, $queuename, $trace, $procby, $expire) = validated_list(\@_,
-        request_queue         => { isa => 'Str' },
+        request_queue         => { isa => 'QueueName' },
         request               => { isa => 'HashRef' },
-        response_queue_suffix => { isa => 'Str', optional => 1 },
+        response_queue_suffix => { isa => 'QueueName', optional => 1 },
         trace                 => { isa => 'Bool', default => 0, optional => 1 },
         process_by            => { isa => 'DateTime', optional => 1 },
         expiration            => { isa => 'Int', optional => 1 }
@@ -146,7 +151,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.08
+version 0.09
 
 =head1 SYNOPSIS
 
