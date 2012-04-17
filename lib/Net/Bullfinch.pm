@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.09';
+  $Net::Bullfinch::VERSION = '0.10';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -17,7 +17,7 @@ use Net::Bullfinch::Iterator;
 
 subtype 'QueueName',
     as 'Str',
-    where { $_ =~ /^[a-zA-Z0-0_-]*$/ };
+    where { $_ =~ /^[a-zA-Z0-9_-]*$/ };
 
 
 has '_client' => (
@@ -151,7 +151,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.09
+version 0.10
 
 =head1 SYNOPSIS
 
