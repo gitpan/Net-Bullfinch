@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.10';
+  $Net::Bullfinch::VERSION = '0.11';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -56,6 +56,13 @@ has 'timeout' => (
     default => 30000
 );
 
+has 'error_on_no_response' => (
+    is => 'rw',
+    isa => 'Bool',
+    default => 0
+);
+
+
 
 sub send {
     my ($self, $queue, $data, $queuename, $trace, $procby, $expire) = validated_list(\@_,
@@ -85,6 +92,9 @@ sub send {
         }
 
         if(!defined($resp)) {
+            if ( $self->error_on_no_response  ) {
+                push @items,{ ERROR => "no response from $queue,$queuename" };
+            }
             last;
         }
     }
@@ -151,7 +161,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -214,6 +224,12 @@ The prefix used for the name of the response queue.
 
 Set the timeout (in milliseconds) that will be used when awaiting a response
 back from Bullfinch.
+
+=head2 error_on_no_response
+
+Set an error explicitly when there is no response from bullfinch default
+behavior is false which will return them same empty array is for success or
+timeout on insert/delete/update statements 
 
 =head1 METHODS
 

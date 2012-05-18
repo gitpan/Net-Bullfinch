@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "MooseX::Params::Validate" => 0,
     "MooseX::Types::DateTime" => 0
   },
-  "VERSION" => "0.10",
+  "VERSION" => "0.11",
   "test" => {
     "TESTS" => "t/*.t"
   }

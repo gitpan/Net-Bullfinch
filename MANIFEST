@@ -13,3 +13,4 @@ t/failure.t
 t/invalid-names.t
 t/release-pod-syntax.t
 t/release-synopsis.t
+t/timeout.t
