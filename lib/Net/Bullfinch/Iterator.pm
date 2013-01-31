@@ -1,6 +1,6 @@
 package Net::Bullfinch::Iterator;
 {
-  $Net::Bullfinch::Iterator::VERSION = '0.12';
+  $Net::Bullfinch::Iterator::VERSION = '0.13';
 }
 use Moose;
 
@@ -60,6 +60,8 @@ sub get_more {
         }
     }
 
+    return if !@results && $self->is_done;
+
     return \@results;
 }
 
@@ -102,10 +104,8 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
-
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -114,7 +114,7 @@ Net::Bullfinch::Iterator - A way to iterator over results from Bullfinch
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -147,10 +147,9 @@ Cory G Watson <gphat@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Infinity Interactive, Inc.
+This software is copyright (c) 2013 by Infinity Interactive, Inc.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
