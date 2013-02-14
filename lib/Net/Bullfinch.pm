@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.13';
+  $Net::Bullfinch::VERSION = '0.14';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -75,7 +75,7 @@ sub send {
         no_response           => { isa => 'Bool', default => 0, optional => 1 }
     );
 
-    
+
     my ($rname, $json);
     if ( $no_response ) {
       ($rname, $json) = $self->_prepare_request($data, undef, undef, $trace, $procby);
@@ -132,6 +132,42 @@ sub iterate {
     );
 }
 
+
+sub iterate_async {
+    my ($self, $queue, $data, $queuename, $expire, $error_cb, $result_cb) = validated_list(\@_,
+        request_queue         => { isa => 'Str' },
+        request               => { isa => 'HashRef' },
+        response_queue_suffix => { isa => 'Str', optional => 1 },
+        expiration            => { isa => 'Int', optional => 1 },
+        error_cb              => { isa => 'CodeRef' },
+        result_cb             => { isa => 'CodeRef' },
+    );
+
+    my ($rname, $json) = $self->_prepare_request($data, $queuename, $self->response_prefix);
+
+    my $request_row_async;
+    $request_row_async = sub {
+        $self->_client->set($queue, $json, $expire, sub {
+            my ($rc) = @_;
+            $error_cb->('Failed to send request!') unless $rc;
+
+            $self->_client->get($rname.'/t='.$self->timeout, sub {
+                my ($resp) = @_;
+                return $result_cb->() unless defined $resp;
+
+                my $decoded = decode_json $resp;
+                return $result_cb->() if exists $decoded->{EOF};
+
+                $result_cb->($decoded);
+
+                $request_row_async->();
+            });
+        });
+    };
+
+    $request_row_async->();
+}
+
 sub _prepare_request {
     my ($self, $data, $queuename, $rname, $trace, $procby) = @_;
 
@@ -150,7 +186,7 @@ sub _prepare_request {
         my $ug = Data::UUID->new;
         $copy{tracer} = $ug->create_str;
     }
-    
+
     if($procby) {
         $copy{'process-by'} = $procby->iso8601;
     }
@@ -170,7 +206,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -238,7 +274,7 @@ back from Bullfinch.
 
 Set an error explicitly when there is no response from bullfinch default
 behavior is false which will return them same empty array is for success or
-timeout on insert/delete/update statements 
+timeout on insert/delete/update statements
 
 =head1 METHODS
 
@@ -264,9 +300,60 @@ in the queue before expiring.
 
 B<Note:> Send will die if it fails to properly enqueue the request.
 
-=head1 AUTHOR
+=head2 iterate_async( request_queue => $queue, request => \%data, response_queue_suffix => $response_name, expiration => $expire, result_cb => \&cb, error_cb => \&err_cb);
+
+Send the request to the specified queue asynchronously and register C<result_cb>
+and C<error_cb> to be called upon the arrival of any results or the occurence of
+an error, respectively.
+
+The data should be a hashref and the queuename (optional) will be appended to
+C<response_prefix>.  This allows you to create a unique response queue per
+request.
+
+Any messages received in response (save the EOF message) are passed to a call to
+the C<result_cb> as the only argument.
+
+The optional C<expiration> is the number of seconds this request should live
+in the queue before expiring.
+
+Encountering any errors, such as not being able to enqueue the request, will
+cause the C<error_cb> to be invoked with a string describing the error as the
+only argument.
+
+B<Note> that this method returns immediately after enqueueing the request. It's
+the callers responsibility to run an L<AnyEvent> compatible event loop in order
+for the enqueued request to actually be sent and the result callbacks to be
+invoked.
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
 
 Cory G Watson <gphat@cpan.org>
+
+=item *
+
+Stevan Little <stevan.little@iinteractive.com>
+
+=item *
+
+Jay Hannah <jay.hannah@iinteractive.com>
+
+=item *
+
+Trey Bianchini <trey.bianchini@iinteractive.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+Florian Ragwitz <rafl@debian.org>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

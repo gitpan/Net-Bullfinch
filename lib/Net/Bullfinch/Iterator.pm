@@ -1,6 +1,6 @@
 package Net::Bullfinch::Iterator;
 {
-  $Net::Bullfinch::Iterator::VERSION = '0.13';
+  $Net::Bullfinch::Iterator::VERSION = '0.14';
 }
 use Moose;
 
@@ -114,7 +114,7 @@ Net::Bullfinch::Iterator - A way to iterator over results from Bullfinch
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 SYNOPSIS
 
@@ -141,9 +141,35 @@ This module provides a way to iterate over a result stream
 coming from Net::Bullfinch. It uses the Data::Stream::Bulk
 role and so therefore has all the functionality implied therein.
 
-=head1 AUTHOR
+=head1 AUTHORS
+
+=over 4
+
+=item *
 
 Cory G Watson <gphat@cpan.org>
+
+=item *
+
+Stevan Little <stevan.little@iinteractive.com>
+
+=item *
+
+Jay Hannah <jay.hannah@iinteractive.com>
+
+=item *
+
+Trey Bianchini <trey.bianchini@iinteractive.com>
+
+=item *
+
+Jesse Luehrs <doy@tozt.net>
+
+=item *
+
+Florian Ragwitz <rafl@debian.org>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

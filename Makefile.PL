@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker 6.30;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Perl wrapper for talking with Bullfinch",
-  "AUTHOR" => "Cory G Watson <gphat\@cpan.org>",
+  "AUTHOR" => "Cory G Watson <gphat\@cpan.org>, Stevan Little <stevan.little\@iinteractive.com>, Jay Hannah <jay.hannah\@iinteractive.com>, Trey Bianchini <trey.bianchini\@iinteractive.com>, Jesse Luehrs <doy\@tozt.net>, Florian Ragwitz <rafl\@debian.org>",
   "BUILD_REQUIRES" => {
     "Test::Exception" => 0,
     "Test::Fatal" => 0,
@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "MooseX::Params::Validate" => 0,
     "MooseX::Types::DateTime" => 0
   },
-  "VERSION" => "0.13",
+  "VERSION" => "0.14",
   "test" => {
     "TESTS" => "t/*.t"
   }

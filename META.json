@@ -1,7 +1,12 @@
 {
    "abstract" : "Perl wrapper for talking with Bullfinch",
    "author" : [
-      "Cory G Watson <gphat@cpan.org>"
+      "Cory G Watson <gphat@cpan.org>",
+      "Stevan Little <stevan.little@iinteractive.com>",
+      "Jay Hannah <jay.hannah@iinteractive.com>",
+      "Trey Bianchini <trey.bianchini@iinteractive.com>",
+      "Jesse Luehrs <doy@tozt.net>",
+      "Florian Ragwitz <rafl@debian.org>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Dist::Zilla version 4.300030, CPAN::Meta::Converter version 2.120921",
@@ -48,17 +53,6 @@
       }
    },
    "release_status" : "stable",
-   "resources" : {
-      "bugtracker" : {
-         "web" : "https://github.com/iinteractive/net-bullfinch/issues"
-      },
-      "homepage" : "https://github.com/iinteractive/net-bullfinch",
-      "repository" : {
-         "type" : "git",
-         "url" : "https://github.com/iinteractive/net-bullfinch.git",
-         "web" : "https://github.com/iinteractive/net-bullfinch"
-      }
-   },
-   "version" : "0.13"
+   "version" : "0.14"
 }
 

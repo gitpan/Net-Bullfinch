@@ -2,6 +2,11 @@
 abstract: 'Perl wrapper for talking with Bullfinch'
 author:
   - 'Cory G Watson <gphat@cpan.org>'
+  - 'Stevan Little <stevan.little@iinteractive.com>'
+  - 'Jay Hannah <jay.hannah@iinteractive.com>'
+  - 'Trey Bianchini <trey.bianchini@iinteractive.com>'
+  - 'Jesse Luehrs <doy@tozt.net>'
+  - 'Florian Ragwitz <rafl@debian.org>'
 build_requires:
   Test::Exception: 0
   Test::Fatal: 0
@@ -27,8 +32,4 @@ requires:
   Moose::Util::TypeConstraints: 0
   MooseX::Params::Validate: 0
   MooseX::Types::DateTime: 0
-resources:
-  bugtracker: https://github.com/iinteractive/net-bullfinch/issues
-  homepage: https://github.com/iinteractive/net-bullfinch
-  repository: https://github.com/iinteractive/net-bullfinch.git
-version: 0.13
+version: 0.14
