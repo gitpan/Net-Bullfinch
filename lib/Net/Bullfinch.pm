@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.14';
+  $Net::Bullfinch::VERSION = '0.15';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -153,7 +153,7 @@ sub iterate_async {
 
             $self->_client->get($rname.'/t='.$self->timeout, sub {
                 my ($resp) = @_;
-                return $result_cb->() unless defined $resp;
+                return $error_cb->('timeout') unless defined $resp;
 
                 my $decoded = decode_json $resp;
                 return $result_cb->() if exists $decoded->{EOF};
@@ -206,7 +206,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 SYNOPSIS
 
