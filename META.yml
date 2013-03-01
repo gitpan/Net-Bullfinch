@@ -32,4 +32,4 @@ requires:
   Moose::Util::TypeConstraints: 0
   MooseX::Params::Validate: 0
   MooseX::Types::DateTime: 0
-version: 0.15
+version: 0.16

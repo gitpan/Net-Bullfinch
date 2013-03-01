@@ -1,6 +1,6 @@
 package Net::Bullfinch;
 {
-  $Net::Bullfinch::VERSION = '0.15';
+  $Net::Bullfinch::VERSION = '0.16';
 }
 use Moose;
 use MooseX::Params::Validate;
@@ -149,7 +149,7 @@ sub iterate_async {
     $request_row_async = sub {
         $self->_client->set($queue, $json, $expire, sub {
             my ($rc) = @_;
-            $error_cb->('Failed to send request!') unless $rc;
+            return $error_cb->('Failed to send request!') unless $rc;
 
             $self->_client->get($rname.'/t='.$self->timeout, sub {
                 my ($resp) = @_;
@@ -206,7 +206,7 @@ Net::Bullfinch - Perl wrapper for talking with Bullfinch
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 SYNOPSIS
 
